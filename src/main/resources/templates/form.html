@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+	<meta charset="utf-8">
+</head>
+<body>
+
+<header th:replace="layout/layout :: header"></header>
+
+<br>
+
+<div class="container">
+	<div class="row">
+		<div class="col-12 card p-4">
+			<h1 class="text-center mb-4" th:text="${titulo}"></h1>
+			<form th:action="@{/form}" th:object="${herramienta}" method="post">
+				<input type="hidden" th:field="*{id}" />
+
+				<div class="form-row">
+					<div class="form-group col-6">
+						<label>Modelo</label>
+						<input type="text" th:field="*{modelo}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></small>
+					</div>
+					<div class="form-group col-6">
+						<label>Marca</label>
+						<input type="text" th:field="*{marca}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></small>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-6">
+						<label>Terminal</label>
+						<input type="text" th:field="*{terminal}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('terminal')}" th:errors="*{terminal}"></small>
+					</div>
+					<div class="form-group col-6">
+						<label>Ensamble</label>
+						<input type="text" th:field="*{ensamble}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('ensamble')}" th:errors="*{ensamble}"></small>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-6">
+						<label>Fecha del próximo mantenimiento</label>
+						<input type="date" th:field="*{fechaProximoMantenimiento}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('fechaProximoMantenimiento')}" th:errors="*{fechaProximoMantenimiento}"></small>
+					</div>
+					<div class="form-group col-6">
+						<label>GMT</label>
+						<input type="text" th:field="*{gmt}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="text-danger" th:if="${#fields.hasErrors('gmt')}" th:errors="*{gmt}"></small>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-6">
+						<label>Link al instructivo</label>
+						<input type="text" th:field="*{link}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="text-danger" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></small>
+					</div>
+					<div class="form-group col-6">
+						<label>Tipo de Herramienta:</label>
+						<select class="form-control" th:field="*{tipoHerramienta}">
+							<option th:value='Aplicador'>Aplicador</option>
+							<option th:value='Handtool'>Handtool</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-6">
+						<label>Nombre del Empleado:</label>
+						<input type="text" th:field="*{nombre}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+					</div>
+					<div class="form-group col-6">
+						<label>Número del Empleado</label>
+						<input type="text" th:field="*{numeroPersona}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('numeroPersona')}" th:errors="*{numeroPersona}"></small>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-6">
+						<label>Fecha en que salió la herramienta</label>
+						<input type="date" th:field="*{fechaSalida}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('fechaSalida')}" th:errors="*{fechaSalida}"></small>
+					</div>
+					<div class="form-group col-6">
+						<label>Fecha en que regresó la herramienta</label>
+						<input type="date" th:field="*{fechaRegreso}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('fechaRegreso')}" th:errors="*{fechaRegreso}"></small>
+					</div>
+				</div>
+
+				<div class="text-center mt-4">
+					<input type="submit" value="Guardar" class="btn btn-primary px-5">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+    <meta charset="utf-8">
+</head>
+<body>
+
+<header th:replace="layout/layout :: header"></header>
+
+<div class="container py-4">
+    <div class="card bg-light">
+        <!--<div class="card-header" th:text="${titulo}">-->
+        <div class="card-header" th:text="${titulo}">
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+
+                <li class="list-group-item">
+                    <strong>ID:</strong> <span th:text="${herramienta.id}"></span>
+                </li>
+
+                <li class="list-group-item">
+                    <strong>Modelo:</strong> <span th:text="${herramienta.modelo}"></span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Marca:</strong> <span th:text="${herramienta.marca}"></span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Terminal:</strong> <span th:text="${herramienta.terminal}"></span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Ensamble:</strong> <span th:text="${herramienta.ensamble}"></span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Tipo de Herramienta:</strong> <span th:text="${herramienta.tipoHerramienta}"></span>
+                </li>
+                <li class="list-group-item">
+                    <!--<strong>Fecha del proximo Mantenimiento: </strong> <span th:text="${herramienta.fecha}"></span> -->
+                    <strong>Fecha del proximo Mantenimiento: </strong><span th:text="${#dates.format(herramienta.fechaProximoMantenimiento, 'dd/MM/yyyy')}"></span>
+                </li>
+                <li class="list-group-item">
+                    <strong>GMT:</strong> <span th:text="${herramienta.gmt}"></span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Ver instructivo:</strong>
+                    <a th:href="${herramienta.link}" th:text="${herramienta.link}" target="_blank"></a>
+                </li>
+                <li class="list-group-item">
+                    <strong>Nombre de la persona que solicita la herramienta: </strong> <span th:text="${herramienta.nombre}"></span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Numero de la Persona: </strong> <span th:text="${herramienta.numeroPersona}"></span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Fecha de salida de la herramienta: </strong> <span th:text="${#dates.format(herramienta.fechaSalida, 'dd/MM/yyyy')}"></span>
+                </li>
+                <li class="list-group-item">
+                    <strong>Fecha del regreso de la herramienta: </strong> <span th:text="${#dates.format(herramienta.fechaRegreso, 'dd/MM/yyyy')}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="layout/layout :: head">
+    <meta charset="utf-8">
+</head>
+<body>
+
+<header th:replace="layout/layout :: header"></header>
+
+<div class="py-4 ml-5 mr-5">
+    <div class="card bg-light">
+        <div class="card-header" th:text="${titulo}"></div>
+        <div class="card-body">
+
+            <!-- FILA DE FORMULARIO E INPUT + BOTONES -->
+            <div class="d-flex align-items-center flex-wrap mb-4">
+
+                <!-- FORMULARIO DE BÚSQUEDA + BOTÓN BUSCAR -->
+                <form th:action="@{/listar}" method="get" class="d-flex align-items-center mb-2">
+                    <input type="text" name="termino" class="form-control mx-2"
+                           placeholder="Buscar herramienta"
+                           th:value="${termino}" style="width: 250px; height: 38px;">
+                    <button type="submit" class="btn btn-outline-primary mx-2">Buscar</button>
+                    <a class="btn btn-outline-secondary mx-2" th:href="@{/listar}">Limpiar</a>
+                </form>
+
+                <!-- BOTONES ACCIONES -->
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/form}" class="btn btn-primary mx-3 mb-2">Agregar Herramienta</a>
+                <a th:href="@{/exportarPDF}" class="btn btn-secondary mx-3 mb-2">Exportar a PDF</a>
+                <a th:href="@{/exportarExcel}" class="btn btn-success mx-3 mb-2">Exportar a Excel</a>
+            </div>
+
+            <!-- TABLA DE HERRAMIENTAS -->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Terminal</th>
+                    <th>Ensamble</th>
+                    <th>Tipo de <br>Herramienta</th>
+                    <th>Fecha del próximo <br>Mantenimiento</th>
+                    <th>GMT</th>
+                    <th></th>
+                    <th sec:authorize="hasRole('ADMIN')"></th>
+                    <th sec:authorize="hasRole('ADMIN')"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="herramienta : ${herramientas}">
+                    <td th:text="${herramienta.id}"></td>
+                    <td th:text="${herramienta.modelo}"></td>
+                    <td th:text="${herramienta.marca}"></td>
+                    <td th:text="${herramienta.terminal}"></td>
+                    <td th:text="${herramienta.ensamble}"></td>
+                    <td th:text="${herramienta.tipoHerramienta}"></td>
+                    <td th:text="${#dates.format(herramienta.fechaProximoMantenimiento, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${herramienta.gmt}"></td>
+                    <td>
+                        <a class="btn btn-info btn-sm" th:href="@{/ver/} + ${herramienta.id}">Detalles</a>
+                    </td>
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <a class="btn btn-warning btn-sm" th:href="@{/form/} + ${herramienta.id}">Editar</a>
+                    </td>
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <a class="btn btn-danger btn-sm" th:href="@{/eliminar/} + ${herramienta.id}"
+                           onclick="return confirm('¿Estás seguro de eliminar la herramienta?');">Eliminar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <nav th:replace="paginator-nav :: paginator"></nav>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
