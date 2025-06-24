@@ -57,6 +57,9 @@
                 <li class="list-group-item">
                     <strong>Fecha del regreso de la herramienta: </strong> <span th:text="${#dates.format(herramienta.fechaRegreso, 'dd/MM/yyyy')}"></span>
                 </li>
+                <li class="list-group-item">
+                    <strong>Comentario: </strong><span th:text="${herramienta.comentario}"></span>
+                </li>
             </ul>
         </div>
     </div>
